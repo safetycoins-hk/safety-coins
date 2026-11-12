@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>昭興－仁利聯營｜地盤安全金幣查詢系統</title>
+<style>
+:root{--bg:#f6f4ee;--card:#fff;--tx:#1f2328;--mu:#69707a;--bd:#e2ded2;--ac:#d98e04;--ac2:#fff3d1;--ok:#1a7f4b;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#16181b;--card:#202327;--tx:#ececec;--mu:#9aa1aa;--bd:#33373d;--ac:#f2b53a;--ac2:#3a2f12;--ok:#4cc58a}}
+:root[data-theme="dark"]{--bg:#16181b;--card:#202327;--tx:#ececec;--mu:#9aa1aa;--bd:#33373d;--ac:#f2b53a;--ac2:#3a2f12;--ok:#4cc58a}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.5 -apple-system,"PingFang HK","Microsoft JhengHei","Noto Sans TC",sans-serif}
+header{padding:20px 16px 8px;max-width:900px;margin:auto}
+h1{font-size:20px;margin:0}
+header p{margin:2px 0 0;color:var(--mu);font-size:13px}
+nav{display:flex;gap:6px;max-width:900px;margin:8px auto;padding:0 16px}
+nav a{flex:1;text-align:center;padding:10px 4px;border:1px solid var(--bd);border-radius:10px;background:var(--card);color:var(--tx);text-decoration:none;font-size:14px}
+nav a.on{background:var(--ac);color:#1b1500;border-color:var(--ac);font-weight:700}
+main{max-width:900px;margin:auto;padding:8px 16px 40px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:16px;margin-bottom:12px}
+input,select,button{font:inherit;color:var(--tx)}
+input[type=text],input[type=search]{width:100%;padding:12px;border:1px solid var(--bd);border-radius:10px;background:var(--bg)}
+button{padding:10px 14px;border-radius:10px;border:1px solid var(--ac);background:var(--ac);color:#1b1500;font-weight:700;cursor:pointer}
+.big{font-size:48px;font-weight:800;color:var(--ac);line-height:1.1}
+.row{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid var(--bd)}
+.row:last-child{border:0}.row span:first-child{color:var(--mu)}
+.tier{display:flex;justify-content:space-between;padding:10px 12px;border-radius:10px;border:1px solid var(--bd);margin-top:8px}
+.tier.ok{background:var(--ac2);border-color:var(--ac)}
+.tier b.y{color:var(--ok)}
+.mu{color:var(--mu);font-size:13px}
+.tools{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.tools input,.tools select{flex:1;min-width:140px;padding:10px;border:1px solid var(--bd);border-radius:10px;background:var(--card)}
+.sum{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
+.sum div{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:10px;text-align:center}
+.sum b{display:block;font-size:22px;color:var(--ac)}
+.wrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:14px}
+th,td{padding:9px 8px;border-bottom:1px solid var(--bd);text-align:left;white-space:nowrap}
+th{color:var(--mu);font-weight:600;position:sticky;top:0;background:var(--bg)}
+td.n{font-weight:700;text-align:right}th.n{text-align:right}
+.admin{border-style:dashed}
+</style>
+</head>
+<body>
+<header><h1>🪙 昭興－仁利聯營｜地盤安全金幣查詢系統</h1><p>資料最後同步:<span id="sync">—</span></p></header>
+<nav id="nav" style="display:none"><a href="#lookup" data-v="lookup">個人金幣查詢</a><a href="#rewards" data-v="rewards">禮物兌換參考</a><a href="#overview" data-v="overview">金幣總覽</a></nav>
+<main id="app"></main>
+<p style="text-align:center"><a href="#" id="adm" class="mu">管理員</a></p>
+<script id="data" type="application/json">{"at":"2026-11-12","rows":[["呂智傑","君臨",125,"2026-10-13"],["劉銳","君臨",100,"2026-10-27"],["姚子華","仁利",90,"2026-09-23"],["陳志成","俊威",90,"2026-09-23"],["陳志華","俊威",90,"2026-09-23"],["陳海楠","君臨",90,"2026-10-13"],["黎浩仁","俊威",90,"2026-09-23"],["徐國輝","俊威",70,"2026-09-23"],["史騎兵","君臨",40,"2026-10-28"],["何雄輝","君臨",40,"2026-11-05"],["李玉蛟","君臨",40,"2026-10-07"],["施清藝","君臨",40,"2026-10-21"],["孫雄強","",40,"2026-10-06"],["徐群英","",40,"2026-10-06"],["張展鵬","君臨",40,"2026-10-21"],["陳銳生","君臨",40,"2026-10-21"],["劉傑誠","華丰",40,"2026-09-23"],["蕭義滉","君臨",40,"2026-11-05"],["龔俊杰","君臨",40,"2026-10-28"],["余偉立","君臨",35,"2026-10-14"],["Wilson","Buda",30,"2026-09-22"],["陳嘉洛","",30,"2026-10-14"],["黃偉明","華丰",30,"2026-09-11"],["鄧浩賢","仁利",30,"2026-10-27"],["譚偉聰","華丰",25,"2026-09-11"],["Gurung Tilak","昇力",20,"2026-10-09"],["Gurung, Ujjwai","昇力",20,"2026-10-09"],["Thapa Pradeep","昇力",20,"2026-10-09"],["Tulachan Rabindra","昇力",20,"2026-10-09"],["林志咸","華丰",20,"2026-09-23"],["林志強","華丰",20,"2026-09-23"],["許俊亮","Freyssinet",20,"2026-09-22"],["陳仲仁","華丰",20,"2026-09-11"],["陳國輝","君臨",20,"2026-10-07"],["曾佑福","昇力",20,"2026-10-09"],["黃文均","君臨",20,"2026-09-23"],["楊志浩","君臨",20,"2026-09-23"],["趙彬","君臨",20,"2026-09-23"],["劉民豐","華丰",20,"2026-09-23"],["謝亞雄","華丰",20,"2026-09-23"],["譚忠亮","君臨",20,"2026-09-23"],["關家輝","君臨",20,"2026-10-07"],["朱煒曄","華丰",10,"2026-09-24"],["楊冠武","華丰",10,"2026-09-24"],["Basharat lqbal","君臨",5,"2026-11-03"],["Khan Shanhzad","華丰",5,"2026-10-26"],["王知遠","華丰",5,"2026-09-24"],["朱華慶","華丰",5,"2026-10-09"],["姚日安","君臨",5,"2026-11-03"],["徐鎮傑","華丰",5,"2026-10-02"],["張兆柱","華丰",5,"2026-10-09"],["梁玉民","華丰",5,"2026-11-03"],["陳少珍","華丰",5,"2026-10-09"],["黃知遠","華丰",5,"2026-10-26"],["楊祖昌","華丰",5,"2026-11-03"],["蔡日季","君臨",5,"2026-11-03"]]}</script>
+<script>
+/* ===== 設定:將 Google Sheets「發佈到網絡」(CSV) 嘅連結貼喺下面;管理員密碼可自行更改 ===== */
+const CONFIG={csvUrl:"https://docs.google.com/spreadsheets/d/e/2PACX-1vRu6Qc3aAlyld6Vd7bDmCk8n0RNm2K0dUcvFKrUuBAnA_Mzslpoq9BsSm4h6RpVjA/pub?gid=1744656265&single=true&output=csv",pin:"1234"};
+const D=JSON.parse(document.getElementById('data').textContent);
+const TIERS=[{n:20,t:'飲料'},{n:100,t:'$200 超市禮券'},{n:200,t:'$500 現金'}];
+const $=s=>document.querySelector(s),app=$('#app');
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const best=b=>{let r=null;TIERS.forEach(t=>{if(b>=t.n)r=t});return r?r.t:'繼續加油累積金幣'};
+let canEdit=false;
+function parseCSV(t){const R=[];let r=[],c='',q=false;for(let i=0;i<t.length;i++){const h=t[i];if(q){if(h=='"'){if(t[i+1]=='"'){c+='"';i++}else q=false}else c+=h}else if(h=='"')q=true;else if(h==','){r.push(c);c=''}else if(h=='\n'||h=='\r'){if(h=='\r'&&t[i+1]=='\n')i++;r.push(c);R.push(r);r=[];c=''}else c+=h}if(c||r.length){r.push(c);R.push(r)}return R}
+async function load(){
+  if(!CONFIG.csvUrl)return;
+  try{
+    const u=CONFIG.csvUrl+(CONFIG.csvUrl.includes('?')?'&':'?')+'t='+Date.now();
+    const res=await fetch(u);if(!res.ok)throw 0;
+    const a=parseCSV(await res.text());
+    const hi=a.findIndex(r=>r.some(c=>/^(工友)?姓名/.test((c||'').trim())));if(hi<0)throw 0;
+    const H=a[hi].map(c=>(c||'').trim()),ix=re=>H.findIndex(c=>re.test(c));
+    const iN=ix(/姓名/),iT=ix(/分判/),iB=ix(/金幣/);if(iN<0||iB<0)throw 0;
+    const body=a.slice(hi+1).filter(r=>(r[iN]||'').trim()&&r[iB]!==''&&!isNaN(Number(String(r[iB]).replace(/,/g,''))));
+    const isD=s=>/^\d{1,2}\/\d{1,2}\/\d{4}$/.test((s||'').trim());
+    let iD=ix(/日期|date|更新/i);
+    if(iD<0){let bc=0;H.forEach((_,k)=>{const c=body.filter(r=>isD(r[k])).length;if(c>bc&&c>=body.length/2){bc=c;iD=k}})}
+    const dmy=s=>{const m=String(s||'').trim().match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);if(!m)return String(s||'').trim();const p=+m[1],q=+m[2],d=p>12?p:q,mo=p>12?q:p;return m[3]+'-'+String(mo).padStart(2,'0')+'-'+String(d).padStart(2,'0')};
+    const tm=a.slice(0,hi).flat().join(' ').match(/(\d{1,2})\/(\d{1,2})\/(\d{4})/);const td=tm?tm[3]+'-'+tm[2].padStart(2,'0')+'-'+tm[1].padStart(2,'0'):'';
+    const rows=body.map(r=>[r[iN].trim(),iT>=0?(r[iT]||'').trim():'',Number(String(r[iB]).replace(/,/g,'')),(iD>=0&&(r[iD]||'').trim())?dmy(r[iD]):td]);
+    if(rows.length){D.rows=rows;D.at=new Date().toLocaleString('zh-HK')}
+  }catch(e){}
+}
+function lookup(){
+  app.innerHTML='<div class="card"><label class="mu">工友姓名(輸入或選擇)</label><input type="text" id="q" list="nl" placeholder="例如:陳志成" autocomplete="off"><datalist id="nl">'+D.rows.map(r=>'<option value="'+esc(r[0])+'">').join('')+'</datalist></div><div id="res"></div>';
+  $('#q').oninput=e=>{
+    const r=D.rows.find(x=>x[0].toLowerCase()===e.target.value.trim().toLowerCase()),o=$('#res');
+    if(!r){o.innerHTML=e.target.value?'<p class="mu">搵唔到呢個姓名,請從清單選擇。</p>':'';return}
+    const nx=TIERS.find(t=>r[2]<t.n);
+    o.innerHTML='<div class="card"><div class="mu">目前可用金幣 (Available Balance)</div><div class="big">'+r[2]+'</div>'
+    +'<div class="row"><span>工友姓名</span><span>'+esc(r[0])+'</span></div>'
+    +'<div class="row"><span>分判名稱</span><span>'+esc(r[1])+'</span></div>'
+    +'<div class="row"><span>最後獲得金幣日期 (Last Update)</span><span>'+esc(r[3])+'</span></div></div>'
+    +'<div class="card"><b>可兌換禮物參考 (Available Rewards)</b>'
+    +TIERS.map(t=>'<div class="tier'+(r[2]>=t.n?' ok':'')+'"><span>'+t.n+' 金幣 → '+t.t+'</span><b class="'+(r[2]>=t.n?'y':'')+'">'+(r[2]>=t.n?'✓ 可兌換':'分數不足')+'</b></div>').join('')
+    +(nx?'<p class="mu">再儲 '+(nx.n-r[2])+' 金幣,就可兌換「'+nx.t+'」。</p>':'<p class="mu">已達最高兌換級別。</p>')+'</div>';
+  };
+}
+function rewards(){app.innerHTML='<div class="card"><b>禮物兌換參考</b>'+TIERS.map(t=>'<div class="tier"><span>'+t.n+' 金幣</span><b>'+t.t+'</b></div>').join('')+'</div>'}
+function overview(){
+  const teams=[...new Set(D.rows.map(r=>r[1]))];
+  app.innerHTML='<div class="sum"><div><b>'+D.rows.length+'</b>工友人數</div><div><b>'+D.rows.reduce((a,r)=>a+r[2],0)+'</b>金幣總數</div><div><b>'+D.rows.filter(r=>r[2]>=100).length+'</b>達 100 金幣</div></div>'
+  +'<div class="tools"><input type="search" id="s" placeholder="搜尋姓名"><select id="t"><option value="">全部分判</option>'+teams.map(t=>'<option>'+esc(t)+'</option>').join('')+'</select></div><div class="card wrap"><table><thead><tr><th>工友姓名</th><th>分判名稱</th><th class="n">目前可用金幣</th><th>可兌換禮物參考</th><th>最後更新日期</th></tr></thead><tbody id="tb"></tbody></table></div>';
+  const draw=()=>{const s=$('#s').value.trim().toLowerCase(),t=$('#t').value;
+    $('#tb').innerHTML=D.rows.filter(r=>(!t||r[1]===t)&&r[0].toLowerCase().includes(s)).sort((a,b)=>b[2]-a[2]).map(r=>'<tr><td>'+esc(r[0])+'</td><td>'+esc(r[1])+'</td><td class="n">'+r[2]+'</td><td>'+best(r[2])+'</td><td>'+esc(r[3])+'</td></tr>').join('')};
+  $('#s').oninput=draw;$('#t').onchange=draw;draw();
+}
+function route(){
+  $('#sync').textContent=D.at;
+  const v=canEdit&&['lookup','rewards','overview'].includes(location.hash.slice(1))?location.hash.slice(1):'lookup';
+  document.querySelectorAll('nav a').forEach(a=>a.classList.toggle('on',a.dataset.v===v));
+  ({lookup,rewards,overview})[v]();
+}
+$('#adm').onclick=e=>{e.preventDefault();const p=prompt('請輸入管理員密碼');if(p===CONFIG.pin){canEdit=true;$('#nav').style.display='flex';location.hash='#overview';route()}else if(p!==null)alert('密碼錯誤')};
+addEventListener('hashchange',route);
+app.textContent='載入中…';
+load().then(route);
+</script>
+</body>
+</html>
