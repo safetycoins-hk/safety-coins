@@ -77,8 +77,12 @@ async function load(){
     if(rows.length){D.rows=rows;D.at=new Date().toLocaleString('zh-HK')}
   }catch(e){}
 }
+function top10(){
+  const t=[...D.rows].sort((a,b)=>b[2]-a[2]||(a[3]||'9').localeCompare(b[3]||'9')).slice(0,10),m=['🥇','🥈','🥉'];
+  return '<div class="card"><b>🏆 安全金幣 TOP 10</b>'+t.map((r,i)=>'<div class="row"><span>'+(m[i]||(i+1)+'.')+' '+esc(r[0])+'</span><b>'+r[2]+'</b></div>').join('')+'</div>';
+}
 function lookup(){
-  app.innerHTML='<div class="card"><label class="mu">工友姓名(輸入或選擇)</label><input type="text" id="q" list="nl" placeholder="例如:陳志成" autocomplete="off"><datalist id="nl">'+D.rows.map(r=>'<option value="'+esc(r[0])+'">').join('')+'</datalist></div><div id="res"></div>';
+  app.innerHTML='<div class="card"><label class="mu">工友姓名(輸入或選擇)</label><input type="text" id="q" list="nl" placeholder="例如:陳志成" autocomplete="off"><datalist id="nl">'+D.rows.map(r=>'<option value="'+esc(r[0])+'">').join('')+'</datalist></div><div id="res"></div>'+top10();
   $('#q').oninput=e=>{
     const r=D.rows.find(x=>x[0].toLowerCase()===e.target.value.trim().toLowerCase()),o=$('#res');
     if(!r){o.innerHTML=e.target.value?'<p class="mu">搵唔到呢個姓名,請從清單選擇。</p>':'';return}
